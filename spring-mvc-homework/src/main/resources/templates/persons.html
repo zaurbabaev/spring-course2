@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Şəxslər</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            color: green;
+        }
+
+        td {
+            color: brown;
+        }
+
+    </style>
+</head>
+<body>
+<a th:href="@{/books}">Kitablar</a><br/><br/>
+<a th:href="@{/students}">Tələbələr</a><br/><br/>
+<a th:href="@{/home}">Ana səhifə</a><br/><br/>
+
+<form th:action="@{/persons}">
+    <input th:name="search" placeholder="Axtar">
+    <input th:value="Axtar" type="submit" style="color: darkblue">
+</form>
+<br/><br/>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Yaş</th>
+        <th>Ünvan</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person:${persons}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.age}"></td>
+        <td th:text="${person.address}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
