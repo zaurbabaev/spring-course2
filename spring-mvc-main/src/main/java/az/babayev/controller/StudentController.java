@@ -3,9 +3,7 @@ package az.babayev.controller;
 import az.babayev.model.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +16,12 @@ public class StudentController {
 
     static {
         students = new ArrayList<>();
-        students.add(new Student(1, "Zaur", "Babayev"));
-        students.add(new Student(2, "Vusal", "Hesenov"));
-        students.add(new Student(3, "Kenan", "Taqiyev"));
-        students.add(new Student(4, "Nuran", "Muradov"));
-        students.add(new Student(5, "Lale", "Yusifova"));
-        students.add(new Student(6, "Nurane", "Kazimova"));
+        students.add(new Student("Zaur", "Babayev"));
+        students.add(new Student("Vusal", "Hesenov"));
+        students.add(new Student("Kenan", "Taqiyev"));
+        students.add(new Student("Nuran", "Muradov"));
+        students.add(new Student("Lale", "Yusifova"));
+        students.add(new Student("Nurane", "Kazimova"));
     }
 
     @GetMapping
@@ -36,4 +34,18 @@ public class StudentController {
         model.addAttribute("students", filteredList);
         return "students";
     }
+
+    @GetMapping("/open-save-page")
+    public String openSave(Model model) {
+        model.addAttribute("student", new Student());
+        return "save-student";
+    }
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute Student student) {
+        students.add(new Student(student.getName(), student.getSurname()));
+        return "redirect:/students";
+    }
+
 }
+

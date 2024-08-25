@@ -4,6 +4,7 @@ public class Student {
     private Integer id;
     private String name;
     private String surname;
+    private static int count;
 
     public Integer getId() {
         return id;
@@ -29,8 +30,12 @@ public class Student {
         this.surname = surname;
     }
 
-    public Student(Integer id, String name, String surname) {
-        this.id = id;
+    public Student() {
+    }
+
+
+    public Student(String name, String surname) {
+        this.id = ++count;
         this.name = name;
         this.surname = surname;
     }

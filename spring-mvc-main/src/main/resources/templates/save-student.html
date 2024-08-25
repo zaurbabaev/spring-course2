@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <title>Tələbə qeydiyyatı</title>
+</head>
+<body>
+
+<a th:href="@{/students}">Tələbələr</a>
+<br/>
+<br/>
+
+<form th:action="@{/students/save}" method="post" th:object="${student}">
+    <label for="student-name">Ad:</label>
+    <input th:type="text" id="student-name" th:field="*{name}">
+    <label for="student-surname">Soyad:</label>
+    <input th:type="text" id="student-surname" th:field="*{surname}">
+    <input type="submit" value="Yadda saxla" style="color: green">
+</form>
+</body>
+</html>
