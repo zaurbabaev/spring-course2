@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tələbələr</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        color: green;
+    }
+
+    td {
+        color: darkblue;
+    }
+
+
+</style>
+<body>
+<!--<a th:href="@{/books}">Kitablar</a>-->
+<a th:href="@{/computers/open-save-page}">Yeni computer qeydiyyatı</a>
+<br/>
+<br/>
+<form th:action="@{/computers}">
+    <input name="search" placeholder="Axtarış">
+    <input class="btn btn-success" th:value="Axtar" th:type="submit">
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>İD</th>
+        <th>Model</th>
+        <th>Marka</th>
+        <th>Qiymət</th>
+        <th>Əməliyyatlar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="computer:${computers}">
+        <td th:text="${computer.id}"></td>
+        <td th:text="${computer.model}"></td>
+        <td th:text="${computer.brand}"></td>
+        <td th:text="${computer.price}"></td>
+        <td><a th:href="@{computers/delete/{id} (id=${computer.id})}">Sil</a>
+            <a th:href="@{computers/edit/{id} (id=${computer.id})}">Redaktə</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
