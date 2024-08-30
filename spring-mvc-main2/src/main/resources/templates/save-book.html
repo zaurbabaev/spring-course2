@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitab qeydiyyatı</title>
+</head>
+
+<body>
+<form th:action="@{save}" method="post" th:object="${book}">
+    <label for="book-name">Ad:</label>
+    <input type="text" id="book-name" th:field="*{name}">
+
+    <label for="book-author">Müəllif:</label>
+    <input type="text" id="book-author" th:field="*{author}">
+
+    <label for="book-price">Qiymət:</label>
+    <input type="text" id="book-price" th:field="*{price}">
+
+    <label for="book-page">Səhifə sayı:</label>
+    <input type="text" id="book-page" th:field="*{page}">
+
+    <input type="submit" value="Yadda saxla" style="color: brown">
+</form>
+
+</body>
+</html>

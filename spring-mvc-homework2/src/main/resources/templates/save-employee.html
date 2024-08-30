@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Işçi qeydiyyatı</title>
+</head>
+<body>
+
+<form th:action="@{/employees/save}" method="post" th:object="${employee}">
+    <label for="employee-name">Ad</label>
+    <input type="text" th:field="*{name}" id="employee-name"> <br/>
+
+    <label for="employee-surname">Soyad</label>
+    <input type="text" th:field="*{surname}" id="employee-surname"><br/>
+
+    <label for="employee-age">Yaş</label>
+    <input type="text" th:field="*{age}" id="employee-age"><br/>
+
+    <label for="employee-address">Ünvan</label>
+    <input type="text" th:field="*{address}" id="employee-address"><br/>
+
+    <label for="employee-position">Vəzifə</label>
+    <select th:field="*{position}" id="employee-position">
+        <option th:value="'IT'">Information technology</option>
+        <option th:value="'HR'">Human Resources</option>
+    </select><br/>
+    <input type="submit" value="Yadda saxla">
+</form>
+</body>
+</html>

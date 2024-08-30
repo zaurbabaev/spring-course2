@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tələbələr</title>
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        color: green;
+    }
+
+    td {
+        color: darkblue;
+    }
+
+
+</style>
+<body>
+<!--<a th:href="@{/books}">Kitablar</a>-->
+<a th:href="@{/students/open-save-page}">Yeni tələbə qeydiyyatı</a>
+<br/>
+<br/>
+<form th:action="@{/students}">
+    <input name="search" placeholder="Axtarış">
+    <input th:value="Axtar" th:type="submit">
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Telefon</th>
+        <th>Ünvan</th>
+        <th>Email</th>
+        <th>Təvəllüd</th>
+        <th>Sektor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student:${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.surname}"></td>
+        <td th:text="${student.phone}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.birthday}"></td>
+        <td th:text="${student.sector}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

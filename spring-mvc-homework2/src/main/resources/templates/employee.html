@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insanlar</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            color: blue;
+        }
+
+        td {
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+
+<form th:action="@{/employees}">
+    <input name="search" placeholder="Axtarış">
+    <input th:value="Axtar" type="submit">
+</form>
+<br/>
+<a th:href="@{/employees/open-save-employees}">Yeni işçi qeydiyyatı</a>
+<br/>
+<br/>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Yaş</th>
+        <th>Ünvan</th>
+        <th>Vəzifəsi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp:${employee}">
+        <td th:text="${emp.id}"></td>
+        <td th:text="${emp.name}"></td>
+        <td th:text="${emp.surname}"></td>
+        <td th:text="${emp.age}"></td>
+        <td th:text="${emp.address}"></td>
+        <td th:text="${emp.position}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

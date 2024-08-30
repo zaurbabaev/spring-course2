@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-
-    </style>
     <meta charset="UTF-8">
     <title>Tələbə qeydiyyatı</title>
 </head>
 <body>
 
 <a th:href="@{/students}">Tələbələr</a>
-<br/>
-<br/>
 
+<br/>
 <form th:action="@{/students/save}" method="post" th:object="${student}">
     <label for="student-name">Ad:</label>
     <input type="text" id="student-name" th:field="*{name}"><br/>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitablar</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            color: black;
+        }
+
+        td {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+<br/>
+<form th:action="@{/books}">
+    <input name="search" placeholder="Search">
+    <input type="submit" th:value="Axtar" style="color: blue">
+</form>
+<br/>
+<a th:href="@{/books/open-save-page}">Kitab qeydiyyatı</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>Müəllif</th>
+        <th>Səhifə sayı</th>
+        <th>Qiymət</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book:${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.page}"></td>
+        <td th:text="${book.price}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
