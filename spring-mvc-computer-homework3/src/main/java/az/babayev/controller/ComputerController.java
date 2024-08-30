@@ -30,7 +30,7 @@ public class ComputerController {
     @GetMapping("/open-save-page")
     public String openSave(Model model) {
         model.addAttribute("computer", new Computer());
-        model.addAttribute("header","Computer qeydiyyatı");
+        model.addAttribute("header", "Computer qeydiyyatı");
         return "save-computer";
     }
 
@@ -52,7 +52,7 @@ public class ComputerController {
     public String editIdSave(@PathVariable Integer id, Model model) {
         Computer findedComputer = service.findById(id);
         model.addAttribute("computer", findedComputer);
-        model.addAttribute("header","Computer redaktəsi");
+        model.addAttribute("header", "Computer redaktəsi");
         return "save-computer";
     }
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tələbələr</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        color: green;
+    }
+
+    td {
+        color: darkblue;
+    }
+
+
+</style>
+<body>
+
+<a th:href="@{/students/open-save-page}">Yeni tələbə qeydiyyatı</a>
+<br/>
+<br/>
+<form th:action="@{/students}">
+    <input name="search" placeholder="Axtarış">
+    <input class="btn btn-success" value="Axtar" th:type="submit">
+</form><br/>
+
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Telefon</th>
+        <th>Ünvan</th>
+        <th>Email</th>
+        <th>Təvəllüd</th>
+        <th>Sektor</th>
+        <th>Əməliyyatlar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student:${students}">
+        <td th:text="${student.counter}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.surname}"></td>
+        <td th:text="${student.phone}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.birthday}"></td>
+<!--        <td th:text="${#dates.format(student.birthDate, 'yyyy-MM-dd')}"></td>-->
+        <td th:text="${student.sector}"></td>
+        <td><a th:href="@{students/delete/{id} (id=${student.id})}">Sil</a>
+            <a th:href="@{students/edit/{id} (id=${student.id})}">Redaktə</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
