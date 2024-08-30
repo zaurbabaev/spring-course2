@@ -18,10 +18,31 @@ public class StudentService {
     }
 
     public List<Student> filter(String search) {
-        return repository.findAll(search);
+        List<Student> studentList = repository.findAll(search);
+        int counter = 0;
+        for (Student student : studentList) {
+            student.setCounter(++counter);
+        }
+        return studentList;
     }
 
     public void add(Student student) {
         repository.add(student);
+    }
+
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
+    }
+
+    public Student findById(Integer id) {
+        Student studentId = repository.findById(id);
+        if (studentId == null) {
+            throw new RuntimeException("Tələbə tapılmadı id=" + id);
+        }
+        return studentId;
+    }
+
+    public void update(Student student) {
+        repository.update(student);
     }
 }

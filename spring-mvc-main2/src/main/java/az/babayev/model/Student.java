@@ -1,7 +1,9 @@
 package az.babayev.model;
 
+import az.babayev.enums.Sector;
 import lombok.Builder;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Builder
@@ -13,15 +15,18 @@ public class Student {
     private String phone;
     private String address;
     private String email;
-    private LocalDate birthday;
-    private String sector;
+    private Date birthday;
+    private Sector sector;
 
+
+    private int counter;
 
     public Student() {
+
     }
 
     public Student(Integer id, String name, String surname, String phone, String address,
-                   String email, LocalDate birthday, String sector) {
+                   String email, Date birthday, Sector sector, int counter) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -30,6 +35,7 @@ public class Student {
         this.email = email;
         this.birthday = birthday;
         this.sector = sector;
+        this.counter = counter;
     }
 
     public Student(Integer id, String name, String surname) {
@@ -37,7 +43,6 @@ public class Student {
         this.name = name;
         this.surname = surname;
     }
-
 
 
     public void setId(Integer id) {
@@ -88,19 +93,27 @@ public class Student {
         this.email = email;
     }
 
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    public String getSector() {
+    public Sector getSector() {
         return sector;
     }
 
-    public void setSector(String sector) {
+    public void setSector(Sector sector) {
         this.sector = sector;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(Integer counter) {
+        this.counter = counter;
     }
 }

@@ -2,39 +2,64 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tələbə qeydiyyatı</title>
+    <title th:text="${header}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
 
 <a th:href="@{/students}">Tələbələr</a>
 
+<h3 th:text="${header}" style="color: darkblue" >{}</h3>
+
 <br/>
 <form th:action="@{/students/save}" method="post" th:object="${student}">
-    <label for="student-name">Ad:</label>
-    <input type="text" id="student-name" th:field="*{name}"><br/>
 
-    <label for="student-surname">Soyad:</label>
-    <input type="text" id="student-surname" th:field="*{surname}"><br/>
+    <input type="hidden" th:field="*{id}">
 
-    <label for="student-phone">Telefon:</label>
-    <input type="text" id="student-phone" th:field="*{phone}"><br/>
+    <div class="form-group">
+        <label for="student-name">Ad:</label>
+        <input class="form-control" type="text" id="student-name" th:field="*{name}"><br/>
+    </div>
 
-    <label for="student-address">Ünvan:</label>
-    <textarea id="student-address" th:field="*{address}"></textarea><br/>
+    <div class="form-group">
+        <label for="student-surname">Soyad:</label>
+        <input class="form-control" type="text" id="student-surname" th:field="*{surname}"><br/>
+    </div>
 
-    <label for="student-email">Email:</label>
-    <input type="email" id="student-email" th:field="*{email}"><br/>
+    <div class="form-group">
+        <label for="student-phone">Telefon:</label>
+        <input class="form-control" type="text" id="student-phone" th:field="*{phone}"><br/>
+    </div>
 
-    <label for="student-birthday">Təvəllüd:</label>
-    <input type="date" id="student-birthday" th:field="*{birthday}"><br/>
+    <div class="form-group">
+        <label for="student-address">Ünvan:</label>
+        <textarea class="form-control" id="student-address" th:field="*{address}"></textarea><br/>
+    </div>
 
-    <label for="student-sector">Sektor:</label>
-    <select id="student-sector" th:field="*{sector}">
-        <option th:each="s:${sectors.entrySet()}"
-                th:value="${s.getKey()}" th:text="${s.getValue()}"/>
-    </select><br/>
+    <div class="form-group">
+        <label for="student-email">Email:</label>
+        <input class="form-control" type="email" id="student-email" th:field="*{email}"><br/>
+    </div>
 
-    <input type="submit" value="Yadda saxla">
+    <div class="form-group">
+        <label for="student-birthday">Təvəllüd:</label>
+        <input class="form-control" type="date" id="student-birthday" th:field="*{birthday}"><br/>
+    </div>
+
+    <div class="form-group">
+        <label for="student-sector">Sektor:</label>
+        <select class="form-control" id="student-sector" th:field="*{sector}">
+            <option th:each="sector : ${sectors}"
+                    th:value="${sector.name()}" th:text="${sector.name()}"/>
+        </select><br/>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Yadda saxla">
 </form>
 </body>
 </html>

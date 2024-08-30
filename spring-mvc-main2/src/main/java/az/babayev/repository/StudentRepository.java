@@ -1,5 +1,6 @@
 package az.babayev.repository;
 
+import az.babayev.enums.Sector;
 import az.babayev.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,8 +35,8 @@ public class StudentRepository {
                         .email(resultSet.getString("email"))
                         .phone(resultSet.getString("phone"))
                         .address(resultSet.getString("address"))
-                        .birthday(resultSet.getDate("birthday").toLocalDate())
-                        .sector(resultSet.getString("sector"))
+                        .birthday(resultSet.getDate("birthday"))
+                        .sector(Sector.valueOf(resultSet.getString("sector")))
                         .build();
                 students.add(student);
             }
@@ -58,8 +59,66 @@ public class StudentRepository {
             statement.setString(3, student.getEmail());
             statement.setString(4, student.getPhone());
             statement.setString(5, student.getAddress());
-            statement.setDate(6, Date.valueOf(student.getBirthday()));
-            statement.setString(7, student.getSector());
+            statement.setDate(6, student.getBirthday());
+            statement.setString(7, (student.getSector().name()));
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteById(Integer id) {
+        try (Connection connection = dataSource.getConnection()) {
+            String DELETE_QUERY = "DELETE FROM students WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(DELETE_QUERY);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public Student findById(Integer id) {
+        Student student = new Student();
+        try (Connection connection = dataSource.getConnection()) {
+            String SELECT_QUERY = "SELECT * FROM students WHERE id =?";
+            PreparedStatement statement = connection.prepareStatement(SELECT_QUERY);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setSurname(resultSet.getString("surname"));
+                student.setAddress(resultSet.getString("address"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhone(resultSet.getString("phone"));
+                student.setBirthday(resultSet.getDate("birthday"));
+                student.setSector(Sector.valueOf(resultSet.getString("sector")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return student;
+
+    }
+
+    public void update(Student student) {
+        try (Connection connection = dataSource.getConnection()) {
+            String UPDATE_QUERY = "UPDATE students SET name=?, surname=?, address=?, email=?," +
+                    "phone=?, birthday=?, sector=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY);
+            statement.setString(1, student.getName());
+            statement.setString(2, student.getSurname());
+            statement.setString(3, student.getAddress());
+            statement.setString(4, student.getEmail());
+            statement.setString(5, student.getPhone());
+            statement.setDate(6, student.getBirthday());
+            statement.setString(7, String.valueOf(student.getSector()));
+            statement.setInt(8, student.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
