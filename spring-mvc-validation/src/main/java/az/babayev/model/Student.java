@@ -15,13 +15,11 @@ import java.sql.Date;
 public class Student {
 
     Integer id;
-    @NotNull(message = "Mütləqdir")
-    @NotEmpty(message = "boş qoymaq olmaz")
+    @NotEmpty(message = "Boş qoymaq olmaz")
     @Size(min = 2, message = "Ad minimum 2 maksimum 30 simvol ola bilər")
     String name;
 
-    @NotNull(message = "Mütləqdir")
-    @NotEmpty(message = "boş qoymaq olmaz")
+    @NotEmpty(message = "Boş qoymaq olmaz")
     @Size(min = 2, message = "Ad minimum 2 maksimum 30 simvol ola bilər")
     String surname;
 
@@ -37,6 +35,7 @@ public class Student {
 
     @Past
     Date birthday;
+
 
     Sector sector;
 
