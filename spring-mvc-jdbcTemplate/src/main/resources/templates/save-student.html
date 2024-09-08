@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${header}"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error{
+            color: red;
+        }
+        .card {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card shadow-sm">
+        <a href="/">Ana səhifə</a>
+        <h3 class="card-title text-center" th:text="${header}" style="color: midnightblue"></h3>
+        <div class="card-body">
+            <form th:method="post" th:action="@{/students/save}" th:object="${student}">
+
+                <input th:type="hidden" th:field="*{id}">
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label" for="student-name">Ad</label>
+                        <input class="form-control" type="text" id="student-name" th:field="*{name}">
+                        <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="student-surname">Soyad</label>
+                        <input class="form-control" type="text" id="student-surname" th:field="*{surname}">
+                        <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
+                    </div>
+                </div>
+
+                <div class=" row mb-3">
+                    <div class="col">
+                        <label class="form-label" for="student-birthday">Təvəllüd</label>
+                        <input class="form-control" type="date" id="student-birthday" th:field="*{birthday}">
+                        <div class="error" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="student-phone">Telefon</label>
+                        <input class="form-control" type="text" id="student-phone" th:field="*{phone}">
+                        <div class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+
+                    <label class="form-label" for="student-address">Ünvan</label>
+                    <textarea class="form-control" id="student-address" th:field="*{address}"></textarea>
+                    <div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label" for="student-email">Email</label>
+                        <input class="form-control" type="email" id="student-email" th:field="*{email}">
+                        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="col">
+                        <label class="form-label" for="student-sector">Sektor</label>
+                        <select class="form-control" th:field="*{sector}" id="student-sector">
+                            <option th:each="entry:${sectors}"
+                                    th:value="${entry.key}"
+                                    th:text="${entry.value}"/>
+                        </select><br/>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="Yadda saxla"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
