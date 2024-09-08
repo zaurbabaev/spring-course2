@@ -14,6 +14,6 @@ public class MyAnnotationValidator implements ConstraintValidator<MyAnnotation, 
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return prefix.startsWith(value);
+        return value.startsWith(prefix);
     }
 }
