@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Müəllimlər</title>
+    <style>
+        /* Düymə stilini təyin edirik */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #008BFF; /* Mavi rəng */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        /* Hover effekti (üzərinə gəldikdə) */
+        .button:hover {
+            background-color: #0056b3; /* Hover üçün daha tünd mavi rəng */
+        }
+    </style>
+</head>
+<body>
+<h1 style="color: darkcyan">Müəllimlər</h1>
+
+<h2><a class="button" th:href="@{/}">Ana səhifə</a>
+    <a class="button" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/managers}">Menecerlər</a>
+    <a class="button" th:href="@{/users/logout}">Təhlükəsiz çıxış</a></h2>
+<h2>
+
+</body>
+</html>
