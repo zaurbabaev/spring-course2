@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Tələbələr</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        color: green;
+    }
+
+    td {
+        color: darkblue;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: flex-start; /* Yanbayan yerləşdirmək üçün */
+        margin-left: -55px; /* Konteynerdən sola sürüşdürür */
+        gap: 10px; /* Düymələr arasında məsafə üçün */
+    }
+
+</style>
+<body>
+<br/>
+<div class="container">
+    <div class="button-container">
+        <h4>
+            <a sec:authorize="hasRole('ROLE_STUDENT_ADD')" th:href="@{/students/open-save-page}"
+               class="btn btn-primary">Yeni tələbə qeydiyyatı</a>
+        </h4>
+        <h4>
+            <a th:href="@{/logout}" class="btn btn-primary">Təhlükəsiz çıxış</a>
+        </h4>
+    </div>
+</div>
+<br/>
+<form th:action="@{/students}">
+    <input name="search" placeholder="Axtarış">
+    <input class="btn btn-success" value="Axtar" th:type="submit">
+</form>
+<br/>
+
+<table sec:authorize="hasRole('ROLE_STUDENT_VIEW')" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Telefon</th>
+        <th>Ünvan</th>
+        <th>Email</th>
+        <th>Təvəllüd</th>
+        <th>Sektor</th>
+        <th sec:authorize="hasAnyRole('ROLE_STUDENT_UPDATE','ROLE_STUDENT_DELETE')">Əməliyyatlar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student:${students}">
+        <td th:text="${student.counter}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.surname}"></td>
+        <td th:text="${student.phone}"></td>
+        <td th:text="${student.address}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.birthday}"></td>
+        <td th:text="${student.sector}"></td>
+        <td><a onclick="return ('Ok?')" sec:authorize="hasRole('ROLE_STUDENT_DELETE')"
+               th:href="@{students/delete/{id} (id=${student.id})}">Sil</a>
+            <a sec:authorize="hasRole('ROLE_STUDENT_UPDATE')"
+               th:href="@{students/edit/{id} (id=${student.id})}">Redaktə</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

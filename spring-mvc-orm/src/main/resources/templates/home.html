@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ana səhifə</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style>
+
+        .button-container {
+            display: flex;
+            justify-content: flex-start; /* Yanbayan yerləşdirmək üçün */
+            margin-left: -55px; /* Konteynerdən sola sürüşdürür */
+            gap: 10px; /* Düymələr arasında məsafə üçün */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="button-container">
+        <h2><a th:href="@{/students}" class="btn btn-primary">Tələbələr</a></h2>
+    </div>
+</div>
+
+
+</body>
+</html>
