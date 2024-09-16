@@ -1,15 +1,14 @@
 package az.babayev.springrestpart2.controller;
 
 import az.babayev.springrestpart2.entity.StudentEntity;
-import az.babayev.springrestpart2.exceptions.StudentOperationNotSupportedException;
-import az.babayev.springrestpart2.exceptions.StudentValidationException;
+import az.babayev.springrestpart2.exceptions.MyValidationException;
 import az.babayev.springrestpart2.service.StudentService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +31,7 @@ public class StudentRestController {
                     @RequestBody StudentEntity request,
                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new StudentValidationException(bindingResult);
+            throw new MyValidationException(bindingResult);
         }
         request.setId(null); // bunu yazmaqla biz post metodu vasitəsilə updatenin qarşısını alırıq
         return service.add(request);
@@ -44,7 +43,7 @@ public class StudentRestController {
                        @RequestBody StudentEntity request,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new StudentValidationException(bindingResult);
+            throw new MyValidationException(bindingResult);
         }
         service.update(request);
     }

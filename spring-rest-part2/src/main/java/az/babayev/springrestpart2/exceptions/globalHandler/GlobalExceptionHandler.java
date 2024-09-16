@@ -1,6 +1,6 @@
 package az.babayev.springrestpart2.exceptions.globalHandler;
 
-import az.babayev.springrestpart2.exceptions.StudentValidationException;
+import az.babayev.springrestpart2.exceptions.MyValidationException;
 import az.babayev.springrestpart2.exceptions.StudentNotFoundException;
 import az.babayev.springrestpart2.exceptions.StudentOperationNotSupportedException;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public List<String> handleStudentValidationException(StudentValidationException myException) {
+    public List<String> handleMyValidationException(MyValidationException myException) {
         BindingResult bindingResult = myException.getBindingResult();
         List<String> errors = new ArrayList<>();
         bindingResult.getFieldErrors().forEach(error ->
