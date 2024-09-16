@@ -1,8 +1,6 @@
 package az.babayev.springrestpart2.exceptions.globalHandler;
 
-import az.babayev.springrestpart2.exceptions.MyValidationException;
-import az.babayev.springrestpart2.exceptions.StudentNotFoundException;
-import az.babayev.springrestpart2.exceptions.StudentOperationNotSupportedException;
+import az.babayev.springrestpart2.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,7 +32,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleNotSupportedException(StudentOperationNotSupportedException exception) {
+    public String handleStudentOperationNotSupportedException(StudentOperationNotSupportedException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleProductNotFoundException(ProductNotFoundException exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleProductOperationNotSupportedException(ProductOperationNotSupportedException exception) {
         return exception.getMessage();
     }
 

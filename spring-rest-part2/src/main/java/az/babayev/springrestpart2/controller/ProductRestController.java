@@ -1,8 +1,8 @@
 package az.babayev.springrestpart2.controller;
 
-import az.babayev.springrestpart2.entity.StudentEntity;
+import az.babayev.springrestpart2.entity.ProductEntity;
 import az.babayev.springrestpart2.exceptions.MyValidationException;
-import az.babayev.springrestpart2.service.StudentService;
+import az.babayev.springrestpart2.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -12,37 +12,38 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("/students")
-public class StudentRestController {
+public class ProductRestController {
 
-    private final StudentService service;
+    private final ProductService service;
 
     @GetMapping
-    public List<StudentEntity> findAll(
-            @RequestParam(name = "search", required = false, defaultValue = "")
-            String search) {
-        return service.filter(search);
+    public List<ProductEntity> findAll(@RequestParam(name = "search", required = false, defaultValue = "")
+                                       String search) {
+        return service.findAll(search);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Long add(@Valid
-                    @RequestBody StudentEntity request,
+                    @RequestBody
+                    ProductEntity request,
                     BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+        if(bindingResult.hasErrors()){
             throw new MyValidationException(bindingResult);
         }
-        request.setId(null); // bunu yazmaqla biz post metodu vasitəsilə updatenin qarşısını alırıq
         return service.add(request);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void update(@Valid
-                       @RequestBody StudentEntity request,
-                       BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
+                       @RequestBody
+                       ProductEntity request,
+                       BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
             throw new MyValidationException(bindingResult);
         }
         service.update(request);
@@ -51,11 +52,7 @@ public class StudentRestController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id){
         service.deleteById(id);
     }
-
-
-
-
 }
