@@ -28,6 +28,13 @@ public class UserRestController {
             throw new MyValidationException(bindingResult);
         }
 
+
         service.createLibrarian(request);
     }
+
+    @GetMapping("/login")
+    public void login() {
+
+    }
+
 }

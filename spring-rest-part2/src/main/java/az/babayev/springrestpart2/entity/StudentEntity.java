@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -43,6 +44,9 @@ public class StudentEntity {
     @DateTimeFormat(pattern = "yyyy-dd-MM")
     @Past(message = "Date of birth must be in past tense")
     LocalDate birthday;
+
+    @OneToMany
+    private List<StudentNoteEntity> notes;
 
 
 }

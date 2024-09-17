@@ -52,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeHttpRequests(request -> request
 //                        .requestMatchers("/h2-console/**").permitAll()
 //                        .requestMatchers(HttpMethod.POST, "/users/**").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
 //                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //
 //                        .anyRequest().authenticated()

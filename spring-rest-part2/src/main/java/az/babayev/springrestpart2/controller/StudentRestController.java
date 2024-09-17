@@ -5,6 +5,7 @@ import az.babayev.springrestpart2.exceptions.MyValidationException;
 import az.babayev.springrestpart2.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/students")
+@CrossOrigin(origins = "*")
 public class StudentRestController {
 
     private final StudentService service;
@@ -33,6 +35,8 @@ public class StudentRestController {
         if (bindingResult.hasErrors()) {
             throw new MyValidationException(bindingResult);
         }
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        request.setCreator(username);
         request.setId(null); // bunu yazmaqla biz post metodu vasitəsilə updatenin qarşısını alırıq
         return service.add(request);
     }
@@ -54,6 +58,7 @@ public class StudentRestController {
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
     }
+
 
 
 

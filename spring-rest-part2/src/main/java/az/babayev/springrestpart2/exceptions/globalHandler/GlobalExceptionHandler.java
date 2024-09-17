@@ -48,5 +48,13 @@ public class GlobalExceptionHandler {
         return exception.getMessage();
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleDataAlreadyExistsException(MyDataAlreadyExistsException exception) {
+        return exception.getMessage();
+    }
+
+
+
 
 }
